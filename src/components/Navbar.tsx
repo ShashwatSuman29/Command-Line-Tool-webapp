@@ -30,12 +30,12 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="bg-slate-900 border-b border-slate-800 sticky top-0 z-50">
+      <nav className="bg-black border-b border-slate-900 sticky top-0 z-50">
         <div className="container mx-auto px-4 py-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
               <Link to="/" className="flex items-center space-x-2">
-                <div className="p-1 bg-indigo-500/20 rounded">
+                <div className="p-1 bg-indigo-900/30 rounded">
                   <LogIn size={20} className="text-indigo-400" />
                 </div>
                 <span className="text-xl font-bold text-white">DevHelper CLI</span>
@@ -44,9 +44,9 @@ const Navbar = () => {
             
             <div className="hidden md:flex items-center space-x-6">
               <Link to="/" className="text-slate-300 hover:text-indigo-400 transition">Home</Link>
-              <Link to="#features" className="text-slate-300 hover:text-indigo-400 transition">Features</Link>
-              <Link to="#docs" className="text-slate-300 hover:text-indigo-400 transition">Documentation</Link>
-              <Link to="#install" className="text-slate-300 hover:text-indigo-400 transition">Installation</Link>
+              <Link to="/features" className="text-slate-300 hover:text-indigo-400 transition">Features</Link>
+              <Link to="/documentation" className="text-slate-300 hover:text-indigo-400 transition">Documentation</Link>
+              <Link to="/installation" className="text-slate-300 hover:text-indigo-400 transition">Installation</Link>
             </div>
             
             <div className="flex items-center space-x-3">
@@ -59,7 +59,7 @@ const Navbar = () => {
                   <Button 
                     variant="outline" 
                     size="sm" 
-                    className="border-indigo-500 text-indigo-400 hover:bg-indigo-950"
+                    className="border-indigo-700 text-indigo-400 hover:bg-black"
                     onClick={handleLogout}
                   >
                     <LogOut size={16} className="mr-2" />
@@ -70,7 +70,7 @@ const Navbar = () => {
                 <Button 
                   variant="outline" 
                   size="sm" 
-                  className="border-indigo-500 text-indigo-400 hover:bg-indigo-950"
+                  className="border-indigo-700 text-indigo-400 hover:bg-black"
                   onClick={handleOpenAuthModal}
                 >
                   <LogIn size={16} className="mr-2" />

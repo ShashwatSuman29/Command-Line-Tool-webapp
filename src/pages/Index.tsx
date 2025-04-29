@@ -11,6 +11,12 @@ import FeatureCard from '@/components/FeatureCard';
 import CommandInfo from '@/components/CommandInfo';
 import Navbar from '@/components/Navbar';
 import { useAuth } from '@/contexts/AuthContext';
+import { useNavigate } from 'react-router-dom';
+import { downloadCliInstaller } from '@/utils/download';
+import AnimatedBackground from '@/components/AnimatedBackground';
+import AnimatedTerminal from '@/components/AnimatedTerminal';
+import MotionWrapper from '@/components/MotionWrapper';
+import { motion } from 'framer-motion';
 
 // Define project structures with proper types
 const projectStructure = [
@@ -101,6 +107,7 @@ const Index = () => {
   const [isTracking, setIsTracking] = useState(false);
   const [trackingTime, setTrackingTime] = useState(0);
   const [projectCreated, setProjectCreated] = useState(false);
+  const navigate = useNavigate();
 
   // Reset project state when user logs out
   useEffect(() => {
@@ -194,56 +201,80 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-800 text-white">
+    <div className="min-h-screen bg-gradient-to-b from-black to-slate-950 text-white">
       <Navbar />
       
-      {/* Hero Section */}
-      <header className="container mx-auto pt-16 pb-12 px-4">
-        <div className="flex flex-col items-center text-center">
-          <div className="mb-6 p-3 bg-indigo-500/20 rounded-full">
-            <Terminal size={40} className="text-indigo-400" />
-          </div>
-          <h1 className="text-5xl font-bold tracking-tight mb-6 bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-purple-500">
-            DevHelper CLI
-          </h1>
-          <p className="text-xl text-slate-300 max-w-2xl mb-8">
-            A full-stack command-line utility for developers to generate boilerplate code, manage projects, track time, and sync with a backend API.
-          </p>
-          <div className="flex flex-wrap gap-4 justify-center">
-            <Button 
-              className="bg-indigo-600 hover:bg-indigo-700"
-              onClick={() => {
-                toast({
-                  title: "Installation Guide",
-                  description: "Check the installation section below for step-by-step instructions.",
-                  duration: 3000
-                });
-              }}
+      {/* Hero Section with Animated Background */}
+      <section className="relative py-20 overflow-hidden">
+        <AnimatedBackground />
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
+            <motion.div 
+              className="text-center lg:text-left lg:w-1/2"
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.7, type: "spring" }}
             >
-              Install Now
-            </Button>
-            <Button 
-              variant="outline" 
-              className="border-indigo-500 text-indigo-400 hover:bg-indigo-950"
-              onClick={() => {
-                toast({
-                  title: "Documentation",
-                  description: "Full documentation is available on GitHub.",
-                  duration: 3000
-                });
-              }}
+              <MotionWrapper variant="fadeIn" duration={0.8}>
+                <h1 className="text-5xl lg:text-6xl font-bold tracking-tight mb-6 bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-purple-500">
+                  DevHelper CLI
+                </h1>
+              </MotionWrapper>
+              
+              <MotionWrapper variant="fadeInUp" delay={0.2} duration={0.7}>
+                <p className="text-xl text-white mb-8 max-w-xl mx-auto lg:mx-0">
+                  A full-stack command-line utility for developers to generate boilerplate code, manage projects, track time, and sync with a backend API.
+                </p>
+              </MotionWrapper>
+              
+              <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
+                <MotionWrapper variant="fadeInUp" delay={0.4} duration={0.5} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                  <Button 
+                    className="bg-indigo-800 hover:bg-indigo-900"
+                    onClick={() => {
+                      downloadCliInstaller();
+                      toast({
+                        title: "Download Started",
+                        description: "Your DevHelper CLI installer download has started.",
+                        duration: 3000
+                      });
+                    }}
+                  >
+                    Install Now
+                  </Button>
+                </MotionWrapper>
+                
+                <MotionWrapper variant="fadeInUp" delay={0.5} duration={0.5} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                  <Button 
+                    variant="outline" 
+                    className="border-indigo-700 text-indigo-400 hover:bg-black/50"
+                    onClick={() => {
+                      navigate('/documentation');
+                    }}
+                  >
+                    View Documentation
+                  </Button>
+                </MotionWrapper>
+              </div>
+            </motion.div>
+            
+            <motion.div 
+              className="lg:w-1/2"
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.7, delay: 0.3, type: "spring" }}
             >
-              View Documentation
-            </Button>
+              <AnimatedTerminal className="w-full max-w-lg mx-auto transform hover:scale-105 transition-transform duration-300" />
+            </motion.div>
           </div>
         </div>
-      </header>
+      </section>
 
       {/* Interactive Demo Section */}
       <section className="container mx-auto py-12 px-4">
         <h2 className="text-3xl font-bold text-center mb-8">Try It Now</h2>
         <div className="max-w-2xl mx-auto space-y-4">
-          <Card className="bg-slate-800 border-slate-700">
+          <Card className="bg-black border-slate-800">
             <CardHeader>
               <CardTitle className="text-indigo-400">Interactive Demo</CardTitle>
               <CardDescription className="text-slate-400">
@@ -254,7 +285,7 @@ const Index = () => {
               <div className="space-y-3">
                 <Button 
                   disabled={true} 
-                  className="w-full bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50"
+                  className="w-full bg-indigo-800 hover:bg-indigo-900 disabled:opacity-50"
                 >
                   {isLoggedIn ? `Logged in as ${user?.email}` : "$ devhelper login (Use the Sign In button in navbar)"}
                 </Button>
@@ -262,7 +293,7 @@ const Index = () => {
                 <Button 
                   onClick={handleProjectCreation} 
                   disabled={!isLoggedIn || projectCreated}
-                  className="w-full bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50"
+                  className="w-full bg-indigo-800 hover:bg-indigo-900 disabled:opacity-50"
                 >
                   {projectCreated 
                     ? "Project 'my-awesome-app' created" 
@@ -289,14 +320,14 @@ const Index = () => {
                 <Button 
                   onClick={handleSync} 
                   disabled={!isLoggedIn}
-                  className="w-full bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50"
+                  className="w-full bg-indigo-800 hover:bg-indigo-900 disabled:opacity-50"
                 >
                   $ devhelper sync
                 </Button>
               </div>
               
               {isLoggedIn && activeProject && (
-                <div className="bg-slate-900 p-4 rounded-md border border-slate-700">
+                <div className="bg-slate-900 p-4 rounded-md border border-slate-800">
                   <h3 className="text-md font-semibold mb-2">Project Status:</h3>
                   <div className="grid grid-cols-2 gap-2 text-sm">
                     <p><span className="text-slate-400">Project:</span> {activeProject}</p>
@@ -343,7 +374,7 @@ const Index = () => {
             description="Powerful command-line interface"
           >
             <p>Manage projects, generate boilerplate code, and track time directly from your terminal.</p>
-            <div className="mt-4 text-sm bg-slate-900 p-3 rounded">
+            <div className="mt-4 text-sm bg-black p-3 rounded">
               <code className="text-green-300">$ devhelper create-project</code>
             </div>
           </FeatureCard>
@@ -354,7 +385,7 @@ const Index = () => {
             description="Robust API architecture"
           >
             <p>Secure REST API powered by Express with MongoDB storage for reliable data persistence and access.</p>
-            <div className="mt-4 text-sm bg-slate-900 p-3 rounded">
+            <div className="mt-4 text-sm bg-black p-3 rounded">
               <code className="text-blue-300">$ devhelper sync --all</code>
             </div>
           </FeatureCard>
@@ -365,7 +396,7 @@ const Index = () => {
             description="Track development progress"
           >
             <p>Start/stop timers for project work and easily sync progress with the cloud dashboard.</p>
-            <div className="mt-4 text-sm bg-slate-900 p-3 rounded">
+            <div className="mt-4 text-sm bg-black p-3 rounded">
               <code className="text-indigo-300">$ devhelper track start</code>
             </div>
           </FeatureCard>
@@ -425,7 +456,7 @@ const Index = () => {
       </section>
 
       {/* Code Examples Section */}
-      <section className="container mx-auto py-16 px-4 bg-slate-900/50 rounded-lg my-12">
+      <section className="container mx-auto py-16 px-4 bg-black/80 rounded-lg my-12">
         <h2 className="text-3xl font-bold text-center mb-12">How It Works</h2>
         
         <Tabs defaultValue="cli" className="max-w-3xl mx-auto">
@@ -619,7 +650,7 @@ module.exports = router;`}
             />
           </CardContent>
           <CardFooter>
-            <Button className="bg-indigo-600 hover:bg-indigo-700 mt-4">
+            <Button className="bg-indigo-800 hover:bg-indigo-900 mt-4">
               View Full Documentation
             </Button>
           </CardFooter>
@@ -627,13 +658,11 @@ module.exports = router;`}
       </section>
 
       {/* Footer */}
-      <footer className="container mx-auto py-8 px-4 border-t border-slate-700 mt-12">
+      <footer className="container mx-auto py-8 px-4 border-t border-slate-800 mt-12">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <p className="text-slate-400"> 2025 DevHelper CLI. All rights reserved.</p>
           <div className="flex gap-4 mt-4 md:mt-0">
-            <a href="#" className="text-slate-400 hover:text-indigo-400">GitHub</a>
-            <a href="#" className="text-slate-400 hover:text-indigo-400">Documentation</a>
-            <a href="#" className="text-slate-400 hover:text-indigo-400">Support</a>
+            <a href="https://github.com/ShashwatSuman29" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-indigo-400">GitHub</a>
           </div>
         </div>
       </footer>

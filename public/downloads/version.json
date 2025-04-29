@@ -1,0 +1,13 @@
+{
+  "version": "1.5.0",
+  "releaseDate": "2025-04-30",
+  "minNodeVersion": "14.0.0",
+  "size": "15.2 MB",
+  "changelog": [
+    "Added support for custom templates",
+    "Improved time tracking accuracy",
+    "Fixed synchronization issues with MongoDB",
+    "Enhanced security for API authentication",
+    "Added offline mode support"
+  ]
+}

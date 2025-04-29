@@ -86,10 +86,10 @@ const Auth = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-800 flex items-center justify-center p-4">
-      <Card className="w-full max-w-md bg-slate-800 border-slate-700">
+    <div className="min-h-screen bg-gradient-to-b from-black to-slate-950 flex items-center justify-center p-4">
+      <Card className="w-full max-w-md bg-black border-slate-800">
         <CardHeader className="text-center">
-          <div className="mx-auto p-2 bg-indigo-500/20 rounded-full w-12 h-12 flex items-center justify-center mb-4">
+          <div className="mx-auto p-2 bg-indigo-900/30 rounded-full w-12 h-12 flex items-center justify-center mb-4">
             <UserRound size={24} className="text-indigo-400" />
           </div>
           <CardTitle className="text-2xl text-white">Welcome to DevHelper CLI</CardTitle>
@@ -97,15 +97,15 @@ const Auth = () => {
         </CardHeader>
         <CardContent>
           <Tabs defaultValue="login" className="w-full">
-            <TabsList className="grid grid-cols-2 mb-6">
-              <TabsTrigger value="login">Login</TabsTrigger>
-              <TabsTrigger value="signup">Sign up</TabsTrigger>
+            <TabsList className="grid grid-cols-2 mb-6 bg-slate-950">
+              <TabsTrigger value="login" className="data-[state=active]:bg-indigo-900/30">Login</TabsTrigger>
+              <TabsTrigger value="signup" className="data-[state=active]:bg-indigo-900/30">Sign up</TabsTrigger>
             </TabsList>
             
             <TabsContent value="login">
               <form onSubmit={handleLogin} className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="email">Email</Label>
+                  <Label htmlFor="email" className="text-slate-300">Email</Label>
                   <Input
                     id="email"
                     name="email"
@@ -114,12 +114,12 @@ const Auth = () => {
                     value={authData.email}
                     onChange={handleInputChange}
                     required
-                    className="bg-slate-900 border-slate-700"
+                    className="bg-slate-950 border-slate-800 text-white"
                   />
                 </div>
                 
                 <div className="space-y-2">
-                  <Label htmlFor="password">Password</Label>
+                  <Label htmlFor="password" className="text-slate-300">Password</Label>
                   <Input
                     id="password"
                     name="password"
@@ -127,13 +127,13 @@ const Auth = () => {
                     value={authData.password}
                     onChange={handleInputChange}
                     required
-                    className="bg-slate-900 border-slate-700"
+                    className="bg-slate-950 border-slate-800 text-white"
                   />
                 </div>
                 
                 <Button 
                   type="submit" 
-                  className="w-full bg-indigo-600 hover:bg-indigo-700"
+                  className="w-full bg-indigo-800 hover:bg-indigo-900"
                   disabled={loading}
                 >
                   {loading ? (
@@ -151,7 +151,7 @@ const Auth = () => {
             <TabsContent value="signup">
               <form onSubmit={handleSignup} className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="signup-email">Email</Label>
+                  <Label htmlFor="signup-email" className="text-slate-300">Email</Label>
                   <Input
                     id="signup-email"
                     name="email"
@@ -160,12 +160,12 @@ const Auth = () => {
                     value={authData.email}
                     onChange={handleInputChange}
                     required
-                    className="bg-slate-900 border-slate-700"
+                    className="bg-slate-950 border-slate-800 text-white"
                   />
                 </div>
                 
                 <div className="space-y-2">
-                  <Label htmlFor="signup-password">Password</Label>
+                  <Label htmlFor="signup-password" className="text-slate-300">Password</Label>
                   <Input
                     id="signup-password"
                     name="password"
@@ -173,13 +173,13 @@ const Auth = () => {
                     value={authData.password}
                     onChange={handleInputChange}
                     required
-                    className="bg-slate-900 border-slate-700"
+                    className="bg-slate-950 border-slate-800 text-white"
                   />
                 </div>
                 
                 <Button 
                   type="submit" 
-                  className="w-full bg-indigo-600 hover:bg-indigo-700"
+                  className="w-full bg-indigo-800 hover:bg-indigo-900"
                   disabled={loading}
                 >
                   {loading ? (

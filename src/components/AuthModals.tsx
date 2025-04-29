@@ -102,27 +102,27 @@ const AuthModals: React.FC<AuthModalsProps> = ({
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="sm:max-w-md bg-black border-slate-800">
         <DialogHeader>
-          <div className="mx-auto p-2 bg-indigo-500/20 rounded-full w-12 h-12 flex items-center justify-center mb-4">
+          <div className="mx-auto p-2 bg-indigo-900/30 rounded-full w-12 h-12 flex items-center justify-center mb-4">
             <UserRound size={24} className="text-indigo-400" />
           </div>
-          <DialogTitle className="text-center text-xl">Welcome to DevHelper CLI</DialogTitle>
-          <DialogDescription className="text-center">
+          <DialogTitle className="text-center text-xl text-white">Welcome to DevHelper CLI</DialogTitle>
+          <DialogDescription className="text-center text-slate-400">
             Sign in to access all features
           </DialogDescription>
         </DialogHeader>
         
         <Tabs defaultValue={defaultTab} className="w-full">
-          <TabsList className="grid grid-cols-2 mb-6">
-            <TabsTrigger value="login">Login</TabsTrigger>
-            <TabsTrigger value="signup">Sign up</TabsTrigger>
+          <TabsList className="grid grid-cols-2 mb-6 bg-slate-950">
+            <TabsTrigger value="login" className="data-[state=active]:bg-indigo-900/30">Login</TabsTrigger>
+            <TabsTrigger value="signup" className="data-[state=active]:bg-indigo-900/30">Sign up</TabsTrigger>
           </TabsList>
           
           <TabsContent value="login">
             <form onSubmit={handleLogin} className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
+                <Label htmlFor="email" className="text-slate-300">Email</Label>
                 <Input
                   id="email"
                   name="email"
@@ -131,11 +131,12 @@ const AuthModals: React.FC<AuthModalsProps> = ({
                   value={authData.email}
                   onChange={handleInputChange}
                   required
+                  className="bg-slate-950 border-slate-800 text-white"
                 />
               </div>
               
               <div className="space-y-2">
-                <Label htmlFor="password">Password</Label>
+                <Label htmlFor="password" className="text-slate-300">Password</Label>
                 <Input
                   id="password"
                   name="password"
@@ -143,12 +144,13 @@ const AuthModals: React.FC<AuthModalsProps> = ({
                   value={authData.password}
                   onChange={handleInputChange}
                   required
+                  className="bg-slate-950 border-slate-800 text-white"
                 />
               </div>
               
               <Button 
                 type="submit" 
-                className="w-full bg-indigo-600 hover:bg-indigo-700"
+                className="w-full bg-indigo-800 hover:bg-indigo-900"
                 disabled={loading}
               >
                 {loading ? (
@@ -166,7 +168,7 @@ const AuthModals: React.FC<AuthModalsProps> = ({
           <TabsContent value="signup">
             <form onSubmit={handleSignup} className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="signup-email">Email</Label>
+                <Label htmlFor="signup-email" className="text-slate-300">Email</Label>
                 <Input
                   id="signup-email"
                   name="email"
@@ -175,11 +177,12 @@ const AuthModals: React.FC<AuthModalsProps> = ({
                   value={authData.email}
                   onChange={handleInputChange}
                   required
+                  className="bg-slate-950 border-slate-800 text-white"
                 />
               </div>
               
               <div className="space-y-2">
-                <Label htmlFor="signup-password">Password</Label>
+                <Label htmlFor="signup-password" className="text-slate-300">Password</Label>
                 <Input
                   id="signup-password"
                   name="password"
@@ -187,12 +190,13 @@ const AuthModals: React.FC<AuthModalsProps> = ({
                   value={authData.password}
                   onChange={handleInputChange}
                   required
+                  className="bg-slate-950 border-slate-800 text-white"
                 />
               </div>
               
               <Button 
                 type="submit" 
-                className="w-full bg-indigo-600 hover:bg-indigo-700"
+                className="w-full bg-indigo-800 hover:bg-indigo-900"
                 disabled={loading}
               >
                 {loading ? (
