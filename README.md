@@ -7,4 +7,3 @@ This project includes a Command Line Interface (CLI) tool designed to simplify a
 
 ---
 
-If you want it tailored for a specific CLI tool you’ve built (e.g., a file manager, project generator, scraper, etc.), feel free to share the details. What kind of CLI tool is it?
